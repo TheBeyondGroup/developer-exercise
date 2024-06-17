@@ -8,7 +8,7 @@
     <link rel="canonical" href="{{ canonical_url }}">
 
     <title>{{ shop.name }}</title>
-
+ 
     <meta name="description" content="">
 
     {%- liquid
@@ -21,6 +21,7 @@
 
   <body class="grid min-h-full grid-cols-[100%] grid-rows-[1fr]">
     <main>
+      {% section 'testPromoBanner' %}
       {{ content_for_layout }}
     </main>
   </body>

@@ -1,0 +1,70 @@
+<!-- banner.liquid -->
+<div class="banner-section" style="background-color: {{ section.settings.background_color }};">
+    <h2 style="color: {{ section.settings.text_color }};">{{ section.settings.banner_text }}</h2>
+    <p>Discount Code: {{ section.settings.discount_code }}</p>
+    <a href="/?utm_medium={{ section.settings.utm_medium }}">Learn More</a>
+</div>
+
+<style>
+    .banner-section {
+        padding: 20px;
+        display: flex;
+        min-height: 40vh;
+        text-align: center;
+        align-items: center;
+        flex-direction: column;
+        justify-content: center;
+    }
+</style>
+
+<script>
+    
+
+    let utmName = "{{section.settings.utm_medium}}"; 
+    let promoName = "{{section.settings.discount_code}}";
+    
+    //show promoBanner
+    if(window.location.href.includes(utmName) || window.location.href.includes(promoName)){
+        console.log("URL match / Discount Code Match");
+        displayPromo();
+    }
+
+</script>
+
+{% schema %}
+{
+  "name": "Banner Section",
+  "settings": [
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#000000"
+    },
+    {
+      "type": "text",
+      "id": "banner_text",
+      "label": "Banner text",
+      "default": "Your message here"
+    },
+    {
+      "type": "text",
+      "id": "discount_code",
+      "label": "Discount Code",
+      "default": "GIVEMEAJOB"
+    },
+    {
+      "type": "text",
+      "id": "utm_medium",
+      "label": "UTM Medium",
+      "default": "WELCOME15"
+    }
+  ]
+}
+{% endschema %}

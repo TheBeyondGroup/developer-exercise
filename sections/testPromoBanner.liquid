@@ -1,0 +1,76 @@
+<!-- banner.liquid -->
+<div id="promoBanner" class="hidden">
+    <p>Your 15% off discount code WELCOME15 will auto-apply at checkout.</p>
+    <button class="close" onclick="hidePromo()">Close</button>
+</div>
+
+<style>
+    #promoBanner{
+        display: flex;
+        padding: 10px 20px;
+        color: #fff;
+        background: #000;
+        justify-content: space-between;
+    }
+
+    #promoBanner.hidden{
+        display: none;
+    }
+
+    #promoBanner .close{
+        border: none;
+        color: #fff;
+        background-color: transparent;
+    }
+</style>
+
+<script>
+
+    function readCookie(cname) {
+        let name = cname + "=";
+        let ca = document.cookie.split(';');
+        for(let i = 0; i < ca.length; i++) {
+            let c = ca[i];
+            while (c.charAt(0) == ' ') {
+                c = c.substring(1);
+            }
+            if (c.indexOf(name) == 0) {
+                return c.substring(name.length, c.length);
+            }
+        }
+        return "";
+    }
+
+    function deleteCookie(name) {
+        document.cookie = name + '=; Max-Age=-99999999; path=/';
+    }
+
+    function displayPromo(){
+        let bannerID = document.getElementById('promoBanner');
+        bannerID.classList.remove("hidden");
+        document.cookie = 'promoBanner = promoBanner';
+        console.log("Banner Promo Show");
+    }
+
+    function hidePromo(){
+        let bannerID = document.getElementById('promoBanner');
+        bannerID.classList.add("hidden");
+        deleteCookie('promoBanner');
+        console.log("Banner Promo Hide");
+    }
+
+    if (readCookie('promoBanner') !== ''){
+        console.log("cookie match");
+        displayPromo();
+    } 
+
+</script>
+
+{% schema %}
+{
+  "name": "Promo Banner Section",
+  "settings": [
+
+  ]
+}
+{% endschema %}
